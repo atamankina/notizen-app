@@ -11,6 +11,7 @@ import { Note } from "./types/notes.type";
 export default function App() {
 
   const [notes, setNotes] = useState<Note[]>(notesData)
+  const [searchTerm, setSearchTerm] = useState<string>('')
 
   function addNote(note: Note): void {
     setNotes([...notes, note]);
@@ -21,11 +22,11 @@ export default function App() {
 
   return (
     <>
-    <Header />
+    <Header setSearch={setSearchTerm} />
     <Container className='mt-3'>
       <Row>
         <Col>
-         <NotesList notes = {notes} setNotes={setNotes}/>
+         <NotesList notes = {notes} setNotes={setNotes} search={searchTerm}/>
        </Col>
        <Col md={4}>
         <CreateNote addNote={addNote} notes={notes}/>
