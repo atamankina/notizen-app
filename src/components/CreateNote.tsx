@@ -13,13 +13,13 @@ function CreateNote(props: Props) {
     const contentRef = useRef<HTMLTextAreaElement>(null);
     const categoriesRef = useRef<HTMLInputElement>(null);
 
-    function handleSubmit(e: React.FormEvent){
-        e.preventDefault;
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
         const title = titleRef.current!.value;
         const content = contentRef.current!.value;
         const categoriesInput = categoriesRef.current!.value;
 
-        if (!title || !content || !categoriesInput) return;
+        if (!title || !content || !categoriesInput) return
 
         const id = props.notes.length + 1;
         const categories = categoriesInput.split(',').map(category => category.trim())
@@ -29,14 +29,14 @@ function CreateNote(props: Props) {
             content,
             categories,
             id
-        })
+        });
 
-    }
+    };
 
     return (
-        <Card className='mb-1'>
-            <Card.Body>
-                <Card.Title>Notiz erstellen</Card.Title>
+        // <Card className='mb-1'>
+        //     <Card.Body>
+        //         <Card.Title>Notiz erstellen</Card.Title>
                 <Form onSubmit={(e) => handleSubmit(e)}>
                     <Form.Group className="mb-3">
                         <Form.Label>Titel</Form.Label>
@@ -52,8 +52,8 @@ function CreateNote(props: Props) {
                     </Form.Group>
                     <Button variant="outline-primary">Notiz erstellen</Button>
                 </Form>
-            </Card.Body>
-        </Card>
+        //     </Card.Body>
+        // </Card>
       );
 
 }
