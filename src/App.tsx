@@ -25,7 +25,7 @@ export default function App() {
     <Container className='mt-3'>
       <Row>
         <Col>
-         <NotesList notes = {notes}/>
+         <NotesList notes = {notes} setNotes={setNotes}/>
        </Col>
        <Col md={4}>
         <CreateNote addNote={addNote} notes={notes}/>

@@ -3,7 +3,8 @@ import { Note } from "../types/notes.type";
 import { Col, Container, Row } from "react-bootstrap";
 
 type Props = {
-    notes: Note[]
+    notes: Note[],
+    setNotes: React.Dispatch<React.SetStateAction<Note[]>>
 }
 
 
