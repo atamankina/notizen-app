@@ -34,9 +34,9 @@ function CreateNote(props: Props) {
     };
 
     return (
-        // <Card className='mb-1'>
-        //     <Card.Body>
-        //         <Card.Title>Notiz erstellen</Card.Title>
+        <Card className='mb-1'>
+            <Card.Body>
+                <Card.Title>Notiz erstellen</Card.Title>
                 <Form onSubmit={(e) => handleSubmit(e)}>
                     <Form.Group className="mb-3">
                         <Form.Label>Titel</Form.Label>
@@ -50,10 +50,10 @@ function CreateNote(props: Props) {
                         <Form.Label>Kategorien</Form.Label>
                         <Form.Control type="text" placeholder="Gebe die Kategorien ein" ref={categoriesRef} />
                     </Form.Group>
-                    <Button variant="outline-primary">Notiz erstellen</Button>
+                    <Button variant="outline-primary" type="submit">Notiz erstellen</Button>
                 </Form>
-        //     </Card.Body>
-        // </Card>
+             </Card.Body>
+         </Card>
       );
 
 }
