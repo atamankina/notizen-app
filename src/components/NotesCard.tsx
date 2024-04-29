@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 
 
 type Props = Note & {
-
+  deletionFunction: (id: number) => void
 }
 
 export default function NotesCard(props: Props) {
@@ -22,7 +22,7 @@ export default function NotesCard(props: Props) {
           categories
         }</Card.Subtitle>
         <Button variant="outline-success" size="sm">Bearbeiten</Button>{' '}
-        <Button variant="outline-danger" size="sm">Löschen</Button>{' '}
+        <Button variant="outline-danger" size="sm" onClick={() => { props.deletionFunction(props.id) }}>Löschen</Button>{' '}
       </Card.Body>
     </Card>
   )
