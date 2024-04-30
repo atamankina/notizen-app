@@ -1,7 +1,10 @@
 import { Button, Container, Form, Navbar } from 'react-bootstrap';
 
+type Props = {
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+}
 
-function Header() {
+function Header(props: Props) {
   return (
     <Navbar expand="md" className="bg-body-tertiary mb-2">
       <Container>
@@ -12,6 +15,7 @@ function Header() {
                     placeholder="Notiz suchen"
                     className="me-2"
                     aria-label="Search"
+                    onChange={e => props.setSearch(e.target.value)}
                   />
                   <Button variant="outline-success">Suchen</Button>
                 </Form>

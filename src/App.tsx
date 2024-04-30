@@ -10,6 +10,7 @@ import { useState } from 'react';
 
 export default function App() {
 
+  const [searchTerm, setSearchTerm] = useState<string>('')
   const [ notes, setNotes ] = useState<Note[]>(notesData)
 
   function addNote(note: Note): void {
@@ -21,14 +22,14 @@ export default function App() {
 
   return (
     <>
-    <Header />
+    <Header setSearch={setSearchTerm}/>
     <Container>
       <Row>
         <Col md={4}>
             <CreateNote notes = {notes} addNote = {addNote} />
         </Col>
         <Col>
-          <NotesList notes = {notes} setNotes={setNotes} />
+          <NotesList notes = {notes} setNotes={setNotes} search={searchTerm}/>
         </Col>
       </Row>
     </Container>
