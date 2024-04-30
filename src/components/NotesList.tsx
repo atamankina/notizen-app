@@ -10,6 +10,11 @@ type Props = {
 
 function NotesList(props: Props){
 
+    function deleteNote(id: number): void {
+        const newNotes = [...props.notes].filter(note => note.id !== id)
+        props.setNotes(newNotes)
+    }
+
     return (
         <>
             <Container>
@@ -21,9 +26,10 @@ function NotesList(props: Props){
                                     id={note.id}
                                     title={note.title}
                                     categories={note.categories}
-                                    content={note.content} 
-                                    user={note.user} 
-                                    date={note.date} />
+                                    content={note.content}
+                                    user={note.user}
+                                    date={note.date} 
+                                    deleteFunction={deleteNote} />
                             </Col>
                     )}
                 </Row>
