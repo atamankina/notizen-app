@@ -5,13 +5,22 @@ import Header from './components/Header';
 import NotesList from './components/NotesList';
 import { notesData } from './data/notes.data';
 import { Note } from './types/notes.type';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useGetNotes } from './hooks/api';
 
 
 export default function App() {
 
   const [searchTerm, setSearchTerm] = useState<string>('')
-  const [ notes, setNotes ] = useState<Note[]>(notesData)
+  const [ notes, setNotes ] = useState<Note[]>([])
+
+  const { isLoading: getNotesIsLoading, data: getNotesData, error: getNotesError } = useGetNotes()
+
+  useEffect(() => {
+    if (!getNotesIsLoading && getNotesData) {
+      setNotes(getNotesData)
+    }
+  }, [getNotesIsLoading, getNotesData])
 
   function addNote(note: Note): void {
     setNotes([...notes, note]);
