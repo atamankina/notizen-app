@@ -10,7 +10,7 @@ type Props = Note & {
 function NotesCard(props: Props) {
 
   const categories = props.categories.map(c => '#' + c).join(' ')
-  const date = props.date.toString().substring(4,21)
+  const date = props.date.toString()
 
   return (
     <Card className='mb-1'>

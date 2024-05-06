@@ -2,6 +2,7 @@ import NotesCard from "./NotesCard";
 import { Note } from "../types/notes.type";
 import { Col, Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../config";
 
 type Props = {
     notes: Note[],
@@ -26,8 +27,15 @@ function NotesList(props: Props){
     }, [props.search, props.notes])
 
     function deleteNote(id: number): void {
-        const newNotes = [...props.notes].filter(note => note.id !== id)
-        props.setNotes(newNotes)
+        fetch(`${BASE_URL}/notes/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Galina'
+            }
+        })
+
+        window.location.reload()
     }
 
     return (
