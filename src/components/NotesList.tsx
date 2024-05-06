@@ -2,6 +2,7 @@ import NotesCard from "./NotesCard";
 import { Note } from "../types/notes.type";
 import { Col, Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../config";
 
 type Props = {
     notes: Note[],
@@ -25,9 +26,16 @@ function NotesList(props: Props){
         filterByContent()
     }, [props.search, props.notes])
 
-    function deleteNote(id: number): void {
-        const newNotes = [...props.notes].filter(note => note.id !== id)
-        props.setNotes(newNotes)
+    function handleDelete(id: number): void {
+        fetch(`${BASE_URL}/notes/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Authorization': 'Galina'
+            }
+          })
+      
+          // force a re-render
+          window.location.reload()
     }
 
     return (
@@ -44,7 +52,7 @@ function NotesList(props: Props){
                                     content={note.content}
                                     user={note.user}
                                     date={note.date} 
-                                    deleteFunction={deleteNote} />
+                                    deleteFunction={handleDelete} />
                             </Col>
                     )}
                 </Row>

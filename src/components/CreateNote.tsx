@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { Note } from "../types/notes.type";
+import { BASE_URL } from "../config";
 
 type Props = {
     notes: Note[],
@@ -19,7 +20,7 @@ function CreateNote(props: Props) {
         const title = titleRef.current!.value;
         const content = contentRef.current!.value;
         const categoriesInput = categoriesRef.current!.value;
-        const user = categoriesRef.current!.value;
+        const user = userRef.current!.value;
 
         if (!title || !content || !categoriesInput || !user) return
 
@@ -27,14 +28,16 @@ function CreateNote(props: Props) {
         const categories = categoriesInput.split(',').map(category => category.trim())
         const date = new Date()
 
-        props.addNote({
-            title,
-            content,
-            user,
-            date,
-            categories,
-            id
-        });
+        fetch(`${BASE_URL}/notes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': user
+            },
+        body: JSON.stringify({ title, content, user, categories })
+        })
+
+        window.location.reload()
 
     };
 
