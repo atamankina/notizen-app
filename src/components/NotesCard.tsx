@@ -76,8 +76,8 @@ function NotesCard(props: Props) {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Title</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label>Titel</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Title"
@@ -86,33 +86,30 @@ function NotesCard(props: Props) {
                 ref={titleRef}
               />
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Content</Form.Label>
+            <Form.Group className="mb-3" >
+              <Form.Label>Inhalt</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
-                placeholder='Content'
+                placeholder='Inhalt'
                 ref={contentRef}
                 defaultValue={props.content}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Categories</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label>Kategorien</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Categories"
+                placeholder="Kategorien"
                 ref={categoriesRef}
                 defaultValue={props.categories.join(', ')}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>User</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label>Benutzer</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="User"
+                placeholder="Benutzer"
                 ref={userRef}
                 defaultValue={props.user}
               />
@@ -120,11 +117,11 @@ function NotesCard(props: Props) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
+          <Button variant="outline-danger" onClick={handleClose}>
+            Abbrechen
           </Button>
-          <Button variant="primary" onClick={handleEdit}>
-            Save Changes
+          <Button variant="outline-primary" onClick={handleEdit}>
+            Speichern
           </Button>
         </Modal.Footer>
       </Modal>
