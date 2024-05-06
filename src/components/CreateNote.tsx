@@ -15,7 +15,7 @@ function CreateNote(props: Props) {
     const categoriesRef = useRef<HTMLInputElement>(null);
     const userRef = useRef<HTMLInputElement>(null);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const title = titleRef.current!.value;
         const content = contentRef.current!.value;
@@ -26,15 +26,22 @@ function CreateNote(props: Props) {
 
         const categories = categoriesInput.split(',').map(category => category.trim())
 
-        fetch(`${BASE_URL}/notes`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Galina'
-            },
-            body: JSON.stringify({ title, content, user, categories })
-        })
+        try {
+            const response = await fetch(`${BASE_URL}/notes`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Galina'
+                },
+                body: JSON.stringify({ title, content, user, categories })
+            })
 
+            if (!response.ok) throw new Error('Failed to create note');
+        } catch (error) {
+            console.error(error);
+            alert('Failed to create note');
+        }
+               
         window.location.reload()
 
     };
@@ -49,7 +56,7 @@ function CreateNote(props: Props) {
                         <Form.Control type="text" placeholder="Gebe den Titel ein" ref={titleRef} />
                     </Form.Group>
                     <Form.Group className="mb-3">
-                        <Form.Label>Inhalte</Form.Label>
+                        <Form.Label>Inhalt</Form.Label>
                         <Form.Control as="textarea" placeholder="Gebe die Notiz ein" rows={5} ref={contentRef} />
                     </Form.Group>
                     <Form.Group className="mb-3">
