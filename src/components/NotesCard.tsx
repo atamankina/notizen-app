@@ -4,6 +4,7 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { useRef } from "react";
 import { BASE_URL, userName } from "../config";
+import { format, parseISO } from 'date-fns';
 
 
 type Props = Note & {
@@ -13,7 +14,8 @@ type Props = Note & {
 function NotesCard(props: Props) {
 
   const categories = props.categories.map(c => '#' + c).join(' ')
-  const date = props.date.toString()
+  const dateString = parseISO(props.date.toString())
+  const date = format(dateString, 'dd-MM-yyyy HH:mm')
 
   const [show, setShow] = useState(false);
 
@@ -54,8 +56,8 @@ function NotesCard(props: Props) {
     <Card className='mb-1'>
       <Card.Body>
         <Card.Title>{props.title}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{props.user}</Card.Subtitle>
-        <Card.Subtitle className="mb-2 text-muted">{date}</Card.Subtitle>
+        <Card.Subtitle className="mb-2 text-muted">Erstellt von {props.user}</Card.Subtitle>
+        <Card.Subtitle className="mb-2 text-muted">am {date}</Card.Subtitle>
         <Card.Text>{props.content}</Card.Text>
         <Card.Subtitle className="mb-2 text-muted">{categories}</Card.Subtitle>
         <Button variant="outline-success" size="sm" onClick={handleShow}>Bearbeiten</Button>
