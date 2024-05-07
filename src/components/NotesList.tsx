@@ -2,7 +2,7 @@ import NotesCard from "./NotesCard";
 import { Note } from "../types/notes.type";
 import { Col, Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { BASE_URL } from "../config";
+import { BASE_URL, userName } from "../config";
 
 type Props = {
     notes: Note[],
@@ -31,7 +31,7 @@ function NotesList(props: Props){
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Galina'
+                'Authorization': userName
             }
         })
 
