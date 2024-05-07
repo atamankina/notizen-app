@@ -3,6 +3,7 @@ import { Note } from "../types/notes.type";
 import { Button, Form, Modal } from "react-bootstrap";
 import { useState } from "react";
 import { useRef } from "react";
+import { BASE_URL, userName } from "../config";
 
 
 type Props = Note & {
@@ -32,6 +33,19 @@ function NotesCard(props: Props) {
     const user = userRef.current!.value;
 
     if (!title || !content || !categoriesInput || !user) return
+
+    const categoriesUpdate = categoriesInput.split(',').map(category => category.trim())
+
+        fetch(`${BASE_URL}/notes/${props.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': userName
+            },
+            body: JSON.stringify({ title, content, user, categories: categoriesUpdate })
+        })
+
+        window.location.reload()
 
   }
 
@@ -96,11 +110,11 @@ function NotesCard(props: Props) {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
+        <Button variant="outline-danger" onClick={handleClose}>
+          Abbrechen
         </Button>
-        <Button variant="primary" onClick={handleClose}>
-          Save Changes
+        <Button variant="outline-primary" onClick={handleEdit}>
+          Notiz Speichern
         </Button>
       </Modal.Footer>
     </Modal>
